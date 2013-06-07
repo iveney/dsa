@@ -1,0 +1,24 @@
+### File format
+
+First line is a number, indicating how many tracks there are The coordinate is
+in integer, real wire and dummy wire alternates, with a cut between a real wire
+(R) and dummy wire (D). A track always starts with a real wire at coordinate 1
+
+### Example
+
+In the following, a wire, either Real or Dummy is represented as
+
+	a-X-b
+
+where a and b are some integer with b > a, X is either R or D, e.g.,
+
+1-R-10 means a real wire at [1, 10]
+
+	3 					// 3 tracks
+	10 30 50			// 1-R-10 C 10-D-30 C 30-R-50
+	8  25 35 40 50    	// 1-R-8 C 8-D-25 C 25-R-35 C 35-D-40 C 40-R-50
+	12 20 37 42 50 		// 1-R-12 C 12-D-20 C 20-R-37 C 37-D-42 C 42-R-50
+
+The above example is visualized as follows:
+
+![Example](format.png)
