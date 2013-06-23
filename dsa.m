@@ -3,5 +3,4 @@
 % DSA Redistribution
 
 % read in a file
-readdata 'data/tiny'
-redis
+layout = readdata('data/tiny');
