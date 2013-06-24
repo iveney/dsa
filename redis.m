@@ -26,11 +26,16 @@ dist = abs(bsxfun(@minus,RC(:,1),RC(:,1)')) + abs(bsxfun(@minus,RC(:,2),RC(:,2)'
 upper = triu(dist);
 [R, C] = find(0 < upper & upper < rule);
 
-%% compute all connected components
+%% compute all connected components as initial grouping
 cs = grComp([R C], numel(cuts));
-ncs = max(cs);
 
-%% resolve conflict for each component
-for i=1:cs
+%% resolve conflict for each group
+for i=1:max(cs)
     nodes = find(cs == i);
+    
+    % finds a template to match
+    
+    % try to 'implement' the match by moving cuts
+    
+    % check if it creates new conflict
 end

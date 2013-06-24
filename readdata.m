@@ -2,6 +2,8 @@
 % the data format is described in data/README
 % this function reads an input file and translates it into matrix format
 % '0' means dummy wire, '1' means real wire, '2' means a cut
+% TODO: insert empty space between tracks to model the track spacing, and
+% for better visualization
 function [layout, cuts] = readdata(filepath)
 fid = fopen(filepath);
 line = fgets(fid);
