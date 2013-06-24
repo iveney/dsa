@@ -1,3 +1,36 @@
 %% redis: Performs DSA redistribution
-% 
-function [opt] = redis(layout)
+% returns the redistributed layout
+function [success, opt] = redis(layout, cuts, templates, rule)
+success = true;
+opt = layout;
+
+%% sort the cut array according to column then row
+RC = [ [cuts.r]' [cuts.c]'];
+[~, idx] = sortrows(RC, [2, 1]);
+sorted = cuts(idx);
+
+%% mark the status of each cut
+% 1 = not finish, 0 = finished
+finish = sparse(RC(:,1), RC(:,2), ones(numel(cuts), 1));
+
+%% construct the graph
+% first compute the distance between each pair
+dist = abs(bsxfun(@minus,RC(:,1),RC(:,1)')) + abs(bsxfun(@minus,RC(:,2),RC(:,2)'));
+
+% Note: this is Euclidean distance
+% dist = bsxfun(@minus,RC(:,1),RC(:,1)').^2 + bsxfun(@minus,RC(:,2),RC(:,2)').^2;
+% dist = sqrt(dist);
+
+% Find all pairs of cuts s.t. their distance is smaller than the rule
+% Note that the matrix is symmetric, use only the upper part is enough
+upper = triu(dist);
+[R, C] = find(0 < upper & upper < rule);
+
+%% compute all connected components
+cs = grComp([R C], numel(cuts));
+ncs = max(cs);
+
+%% resolve conflict for each component
+for i=1:cs
+    nodes = find(cs == i);
+end
