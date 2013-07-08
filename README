@@ -1,0 +1,10 @@
+Algorithm idea:
+
+- Construct connected component for cuts
+- For each connected component, find a template to match.
+  - A component has k cuts, the cuts has location information
+  - Find a template that has k cuts and is possible to achieve, i.e., there is a way to move the cuts to have the same relative positions as the matched template
+  - If not, there may be two cases:
+    - break the component to several, e.g., k = 5, break into k1 = 2 and k2 = 3, then match to two templates respectively. 
+    - k is too small, every template has a cut number x > k, then it is impossible to break and match. This means the grouping is bad.
+      Need to MERGE with some other group
