@@ -2,7 +2,9 @@
 % 
 % DSA Redistribution
 
-% there are three templates
+addpath('graph');
+
+% there are three templates in this demo
 templates = {
 ones(3, 1)
 ones(2, 1)
@@ -14,8 +16,15 @@ rule = 5;
 
 % read in a file
 [layout, cuts] = readdata('data/tiny');
-visualize(layout);
-[success, layout] = redis(layout, cuts, templates, rule);
+
+% draw the layout
+visualize(layout, 'original');
+
+% perform redistribution
+[success, modified] = redis(layout, cuts, templates, rule);
+
+
+% draw the new layout if successful
 if success == true
-    visualize(layout)
+    visualize(modified, 'modified');
 end
